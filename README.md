@@ -4,10 +4,8 @@
   - (a) All users in the System (id, email) and how many campaigns each of them have.
 
   ```
-  SELECT
-    User.id AS UserId, User.email AS UserEmail, (SELECT count(*) FROM Campaign WHERE user_id = User.id) AS NumberOfCampaigns
-  FROM
-    User;
+  SELECT User.id AS UserId, User.email AS UserEmail, (SELECT count(*) FROM Campaign WHERE user_id = User.id) AS NumberOfCampaigns
+  FROM User;
   ```
   - (b) Who are the respondents that responded to campaigns of type "DirectMailCampaign" over the past 1 month?
 
