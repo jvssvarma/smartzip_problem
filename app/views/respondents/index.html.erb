@@ -5,7 +5,6 @@
 <table>
   <thead>
     <tr>
-      <th>User</th>
       <th>Name</th>
       <th>Email</th>
       <th>Phone number</th>
@@ -16,7 +15,6 @@
   <tbody>
     <% @respondents.each do |respondent| %>
       <tr>
-        <td><%= respondent.user %></td>
         <td><%= respondent.name %></td>
         <td><%= respondent.email %></td>
         <td><%= respondent.phone_number %></td>

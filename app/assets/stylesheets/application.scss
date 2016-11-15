@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+
+ .skinny_wrapper {
+ 	width: 90%;
+ 	max-width: 70rem;
+ 	margin: 0 auto;
+ }
+
+ .wrapper_padding {
+   padding: 4rem 0;
+ }
+
+ @import "bootstrap-sprockets";
+ @import "bootstrap";

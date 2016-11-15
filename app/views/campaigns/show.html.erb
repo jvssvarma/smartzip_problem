@@ -1,19 +1,32 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-3">
+  <br>
+  <h3>Campaign Name: &nbsp;<strong><%= @campaign.name %></strong></h3>
+  <br>
+  <h4>Type of Campaign: <strong><%= @campaign.typeof %></strong></h4>
+</div>
+<div class="col-md-6 text-center">
+<h1>Campaign Respondents</h1>
 
-<p>
-  <strong>User:</strong>
-  <%= @campaign.user %>
-</p>
+<table class="table offset2">
+  <thead>
+    <tr>
+      <th class="text-center">Name</th>
+      <th class="text-center">Email</th>
+      <th class="text-center">Phone number</th>
+    </tr>
+  </thead>
 
-<p>
-  <strong>Name:</strong>
-  <%= @campaign.name %>
-</p>
+  <tbody>
+    <% @campaign_respondents.each do |respondent| %>
+      <tr>
+        <td><%= respondent.name %></td>
+        <td><%= respondent.email %></td>
+        <td><%= respondent.phone_number %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<p>
-  <strong>Typeof:</strong>
-  <%= @campaign.typeof %>
-</p>
-
-<%= link_to 'Edit', edit_campaign_path(@campaign) %> |
-<%= link_to 'Back', campaigns_path %>
+<%= link_to 'Edit Campaign', edit_campaign_path(@campaign), class: "btn btn-default" %> |
+<%= link_to 'Destroy Campaign', @campaign, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning" %>
+</div>

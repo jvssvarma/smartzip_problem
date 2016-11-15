@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_one :user_profile
+  has_many :campaigns
+  has_many :respondents
 end

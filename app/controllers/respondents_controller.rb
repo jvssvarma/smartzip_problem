@@ -1,5 +1,6 @@
 class RespondentsController < ApplicationController
   before_action :set_respondent, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /respondents
   # GET /respondents.json
@@ -14,7 +15,7 @@ class RespondentsController < ApplicationController
 
   # GET /respondents/new
   def new
-    @respondent = Respondent.new
+    @respondent = current_user.build_respondent
   end
 
   # GET /respondents/1/edit
@@ -24,7 +25,7 @@ class RespondentsController < ApplicationController
   # POST /respondents
   # POST /respondents.json
   def create
-    @respondent = Respondent.new(respondent_params)
+    @respondent = current_user.build_respondent(respondent_params)
 
     respond_to do |format|
       if @respondent.save

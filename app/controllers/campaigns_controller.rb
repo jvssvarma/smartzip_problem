@@ -1,20 +1,30 @@
 class CampaignsController < ApplicationController
   before_action :set_campaign, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /campaigns
   # GET /campaigns.json
   def index
-    @campaigns = Campaign.all
+    @user = current_user
+    @campaign_count = Campaign.where(user_id: @user.id).count
+    @user_campaigns = @user.campaigns
   end
 
   # GET /campaigns/1
   # GET /campaigns/1.json
   def show
+    @respondents_ids = CampaignRespondent.where(campaign_id: @campaign.id)
+    @campaign_respondents = []
+    @respondents_ids.each do |res|
+      @campaign_respondents << Respondent.find_by(id: res.id)
+    end
+    @campaign_respondents = @campaign_respondents.compact
   end
 
   # GET /campaigns/new
   def new
-    @campaign = Campaign.new
+    @user = current_user
+    @campaign = current_user.campaigns.build
   end
 
   # GET /campaigns/1/edit
@@ -24,8 +34,8 @@ class CampaignsController < ApplicationController
   # POST /campaigns
   # POST /campaigns.json
   def create
-    @campaign = Campaign.new(campaign_params)
-
+    @user = current_user
+    @campaign = current_user.campaigns.build(campaign_params)
     respond_to do |format|
       if @campaign.save
         format.html { redirect_to @campaign, notice: 'Campaign was successfully created.' }
@@ -64,6 +74,7 @@ class CampaignsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_campaign
+      @user = current_user
       @campaign = Campaign.find(params[:id])
     end
 

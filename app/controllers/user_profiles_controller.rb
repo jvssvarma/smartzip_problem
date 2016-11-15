@@ -1,5 +1,6 @@
 class UserProfilesController < ApplicationController
   before_action :set_user_profile, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /user_profiles
   # GET /user_profiles.json
@@ -14,7 +15,8 @@ class UserProfilesController < ApplicationController
 
   # GET /user_profiles/new
   def new
-    @user_profile = UserProfile.new
+    @user = current_user
+    @user_profile = @user.build_user_profile
   end
 
   # GET /user_profiles/1/edit
@@ -24,11 +26,12 @@ class UserProfilesController < ApplicationController
   # POST /user_profiles
   # POST /user_profiles.json
   def create
-    @user_profile = UserProfile.new(user_profile_params)
+    @user = current_user
+    @user_profile = @user.build_user_profile(user_profile_params)
 
     respond_to do |format|
       if @user_profile.save
-        format.html { redirect_to @user_profile, notice: 'User profile was successfully created.' }
+        format.html { redirect_to root_path, notice: 'User profile was successfully created.' }
         format.json { render :show, status: :created, location: @user_profile }
       else
         format.html { render :new }
@@ -42,7 +45,7 @@ class UserProfilesController < ApplicationController
   def update
     respond_to do |format|
       if @user_profile.update(user_profile_params)
-        format.html { redirect_to @user_profile, notice: 'User profile was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'User profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @user_profile }
       else
         format.html { render :edit }
