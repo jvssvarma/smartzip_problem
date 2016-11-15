@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_one :user_profile
-  has_many :campaigns
+  has_one :user_profile, dependent: :destroy
+  has_many :campaigns, dependent: :destroy
   has_many :respondents
 end
