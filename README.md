@@ -127,7 +127,7 @@
   puts e  #printing to visualize the hash  
   ```
 
-##### 4, 5, 6, 7, 9 Implemented in the application
+##### 4, 5, 6, 7, 8, 9 Implemented in the application
 
 ##### 10. Are there any other gem you'd like to use as part of this project and why? Any other Suggestions?
   If time persists, I would've added 'pundit' for authorization and 'Arel' for better understanding of SQL and ActiveRecord Queries.
