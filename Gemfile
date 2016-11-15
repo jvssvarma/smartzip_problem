@@ -15,6 +15,7 @@ gem 'devise'
 gem 'bootstrap-sass'
 
 group :development, :test do
+  gem 'pry-rails'
   gem 'byebug', platform: :mri
 end
 
