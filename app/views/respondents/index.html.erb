@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Respondents</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone number</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @respondents.each do |respondent| %>
+      <tr>
+        <td><%= respondent.user %></td>
+        <td><%= respondent.name %></td>
+        <td><%= respondent.email %></td>
+        <td><%= respondent.phone_number %></td>
+        <td><%= link_to 'Show', respondent %></td>
+        <td><%= link_to 'Edit', edit_respondent_path(respondent) %></td>
+        <td><%= link_to 'Destroy', respondent, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Respondent', new_respondent_path %>

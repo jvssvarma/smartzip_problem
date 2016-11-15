@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  campaign: one
+  respondent: one
+  keycode: MyString
+
+two:
+  campaign: two
+  respondent: two
+  keycode: MyString

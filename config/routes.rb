@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :respondents
   resources :campaigns
   resources :user_profiles
   devise_for :users

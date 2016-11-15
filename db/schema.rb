@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115104900) do
+ActiveRecord::Schema.define(version: 20161115105327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "campaign_respondents", force: :cascade do |t|
+    t.integer "campaign_id"
+    t.integer "respondent_id"
+    t.string  "keycode"
+    t.index ["campaign_id"], name: "index_campaign_respondents_on_campaign_id", using: :btree
+    t.index ["respondent_id"], name: "index_campaign_respondents_on_respondent_id", using: :btree
+  end
 
   create_table "campaigns", force: :cascade do |t|
     t.integer  "user_id"
@@ -22,6 +30,16 @@ ActiveRecord::Schema.define(version: 20161115104900) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_campaigns_on_user_id", using: :btree
+  end
+
+  create_table "respondents", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone_number"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["user_id"], name: "index_respondents_on_user_id", using: :btree
   end
 
   create_table "user_profiles", force: :cascade do |t|
@@ -50,6 +68,9 @@ ActiveRecord::Schema.define(version: 20161115104900) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "campaign_respondents", "campaigns"
+  add_foreign_key "campaign_respondents", "respondents"
   add_foreign_key "campaigns", "users"
+  add_foreign_key "respondents", "users"
   add_foreign_key "user_profiles", "users"
 end
